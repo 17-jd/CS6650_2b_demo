@@ -148,7 +148,8 @@ func newRouter(key string, testErrors bool) *gin.Engine {
 	r := gin.New()
 	registry := prometheus.NewRegistry()
 	r.Use(observe(registry))
-	r.Use(gin.CustomRecovery(func(c *gin.Context, _ any) { fail(c, 500, "INTERNAL_ERROR", "Internal server error") }))
+	// Keep the recovery handler from dumping request headers (including API keys).
+	r.Use(gin.CustomRecoveryWithWriter(io.Discard, func(c *gin.Context, _ any) { fail(c, 500, "INTERNAL_ERROR", "Internal server error") }))
 	r.GET("/health", func(c *gin.Context) { c.Status(200) })
 	r.GET("/metrics", gin.WrapH(promhttp.HandlerFor(registry, promhttp.HandlerOpts{})))
 	store := newStore()

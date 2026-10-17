@@ -1,0 +1,1 @@
+PASS: 7 requests produced JSON log lines with endpoint, status and duration. No API key appeared, including on induced 500 responses.
