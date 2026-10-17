@@ -118,6 +118,8 @@ docker_host = "unix:///var/run/docker.sock"
 # docker_host = "unix:///Users/twinkle/.colima/default/docker.sock"
 ```
 
+For a fresh deployment, use your own Learner Lab account. To manage this existing stack from a different machine, transfer its Terraform state privately or configure remote state; a fresh empty state cannot manage the already-created resources.
+
 4. Deploy:
 
 ```sh
@@ -162,6 +164,8 @@ At idle, the request rate drops to zero and there is no new latency distribution
 Measured results and screenshot links follow below.
 
 ## Actual results — October 17, 2026
+
+**Current API:** `http://35.172.200.112:8080`. Terraform apply completed, with one running task and no pending tasks. [Final deployment verification](results/final-deployment.json) and [fresh API checks](results/ecs-final-responses.txt). Fault injection is off on AWS.
 
 The deployed endpoint at test time was `http://18.205.26.175:8080`. It is reachable only from the configured client IP and can change when ECS replaces the task. Use `terraform/service_url.py` to find its current address. Terraform successfully deployed the service; see [apply output](results/terraform-apply.txt).
 

@@ -1,0 +1,179 @@
+data.aws_iam_role.lab_role: Reading...
+data.aws_ecr_authorization_token.registry: Reading...
+module.logging.aws_cloudwatch_log_group.this: Refreshing state... [id=/ecs/hw5-product-api]
+module.network.data.aws_vpc.default: Reading...
+module.ecr.aws_ecr_repository.this: Refreshing state... [id=hw5-product-api]
+data.aws_ecr_authorization_token.registry: Read complete after 0s [id=us-east-1]
+data.aws_iam_role.lab_role: Read complete after 0s [id=LabRole]
+docker_image.app: Refreshing state... [id=sha256:fb3a98ee70d2c4da31d7ebce185cc17ed207605f43519da3987daccc746b9b4e017724090080.dkr.ecr.us-east-1.amazonaws.com/hw5-product-api:latest]
+docker_registry_image.app: Refreshing state... [id=sha256:fb3a98ee70d2c4da31d7ebce185cc17ed207605f43519da3987daccc746b9b4e]
+module.network.data.aws_vpc.default: Read complete after 1s [id=vpc-07c1ae7af5177d895]
+module.network.data.aws_subnets.default: Reading...
+module.network.aws_security_group.this: Refreshing state... [id=sg-00892b5be17524a21]
+module.ecs.aws_ecs_cluster.this: Refreshing state... [id=arn:aws:ecs:us-east-1:017724090080:cluster/hw5-product-api-cluster]
+module.ecs.aws_ecs_task_definition.this: Refreshing state... [id=hw5-product-api-task]
+module.network.data.aws_subnets.default: Read complete after 0s [id=us-east-1]
+module.ecs.aws_ecs_service.this: Refreshing state... [id=arn:aws:ecs:us-east-1:017724090080:service/hw5-product-api-cluster/hw5-product-api]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  ~ update in-place
+-/+ destroy and then create replacement
+
+Terraform will perform the following actions:
+
+  # docker_image.app must be replaced
+-/+ resource "docker_image" "app" {
+      ~ id          = "sha256:fb3a98ee70d2c4da31d7ebce185cc17ed207605f43519da3987daccc746b9b4e017724090080.dkr.ecr.us-east-1.amazonaws.com/hw5-product-api:latest" -> (known after apply)
+      ~ image_id    = "sha256:fb3a98ee70d2c4da31d7ebce185cc17ed207605f43519da3987daccc746b9b4e" -> (known after apply)
+        name        = "017724090080.dkr.ecr.us-east-1.amazonaws.com/hw5-product-api:latest"
+      ~ repo_digest = "017724090080.dkr.ecr.us-east-1.amazonaws.com/hw5-product-api@sha256:fb3a98ee70d2c4da31d7ebce185cc17ed207605f43519da3987daccc746b9b4e" -> (known after apply)
+      ~ triggers    = { # forces replacement
+          ~ "source_hash" = "58d220b01c8f95356a8b329445a3c62f28407b1363cfd2b4dd3fd92d82aeba32" -> "02f15877e30d710f6f3a0b3181289b92a3812971841a35690e6f93bf2b27ac37"
+        }
+
+      - build {
+          - additional_contexts = [] -> null
+          - build_args          = {} -> null
+          - cache_from          = [] -> null
+          - cache_to            = [] -> null
+          - context             = "./../src" -> null
+          - cpu_period          = 0 -> null
+          - cpu_quota           = 0 -> null
+          - cpu_shares          = 0 -> null
+          - dockerfile          = "Dockerfile" -> null
+          - extra_hosts         = [] -> null
+          - force_remove        = false -> null
+          - label               = {} -> null
+          - labels              = {} -> null
+          - memory              = 0 -> null
+          - memory_swap         = 0 -> null
+          - no_cache            = false -> null
+          - platform            = "linux/arm64" -> null
+          - pull_parent         = false -> null
+          - remove              = true -> null
+          - security_opt        = [] -> null
+          - shm_size            = 0 -> null
+          - squash              = false -> null
+          - suppress_output     = false -> null
+          - tag                 = [] -> null
+            # (12 unchanged attributes hidden)
+        }
+      + build {
+          + additional_contexts = []
+          + cache_from          = []
+          + cache_to            = []
+          + context             = "./../src"
+          + dockerfile          = "Dockerfile"
+          + extra_hosts         = []
+          + platform            = "linux/arm64"
+          + remove              = true
+          + security_opt        = []
+          + tag                 = []
+            # (12 unchanged attributes hidden)
+        }
+    }
+
+  # docker_registry_image.app must be replaced
+-/+ resource "docker_registry_image" "app" {
+      ~ id                   = "sha256:fb3a98ee70d2c4da31d7ebce185cc17ed207605f43519da3987daccc746b9b4e" -> (known after apply)
+        name                 = "017724090080.dkr.ecr.us-east-1.amazonaws.com/hw5-product-api:latest"
+      ~ sha256_digest        = "sha256:fb3a98ee70d2c4da31d7ebce185cc17ed207605f43519da3987daccc746b9b4e" -> (known after apply)
+      ~ triggers             = {
+          - "image_id" = "sha256:fb3a98ee70d2c4da31d7ebce185cc17ed207605f43519da3987daccc746b9b4e"
+        } -> (known after apply) # forces replacement
+        # (2 unchanged attributes hidden)
+    }
+
+  # module.ecs.aws_ecs_service.this will be updated in-place
+  ~ resource "aws_ecs_service" "this" {
+        id                                 = "arn:aws:ecs:us-east-1:017724090080:service/hw5-product-api-cluster/hw5-product-api"
+        name                               = "hw5-product-api"
+        tags                               = {}
+      ~ task_definition                    = "arn:aws:ecs:us-east-1:017724090080:task-definition/hw5-product-api-task:2" -> (known after apply)
+        # (18 unchanged attributes hidden)
+
+        # (3 unchanged blocks hidden)
+    }
+
+  # module.ecs.aws_ecs_task_definition.this must be replaced
+-/+ resource "aws_ecs_task_definition" "this" {
+      ~ arn                      = "arn:aws:ecs:us-east-1:017724090080:task-definition/hw5-product-api-task:2" -> (known after apply)
+      ~ arn_without_revision     = "arn:aws:ecs:us-east-1:017724090080:task-definition/hw5-product-api-task" -> (known after apply)
+      ~ container_definitions    = jsonencode(
+            [
+              - {
+                  - environment      = [
+                      - {
+                          - name  = "ENABLE_TEST_ERRORS"
+                          - value = "false"
+                        },
+                    ]
+                  - essential        = true
+                  - image            = "017724090080.dkr.ecr.us-east-1.amazonaws.com/hw5-product-api@sha256:fb3a98ee70d2c4da31d7ebce185cc17ed207605f43519da3987daccc746b9b4e"
+                  - logConfiguration = {
+                      - logDriver = "awslogs"
+                      - options   = {
+                          - awslogs-group         = "/ecs/hw5-product-api"
+                          - awslogs-region        = "us-east-1"
+                          - awslogs-stream-prefix = "ecs"
+                        }
+                    }
+                  - mountPoints      = []
+                  - name             = "hw5-product-api-container"
+                  - portMappings     = [
+                      - {
+                          - containerPort = 8080
+                          - hostPort      = 8080
+                          - protocol      = "tcp"
+                        },
+                    ]
+                  - systemControls   = []
+                  - volumesFrom      = []
+                },
+            ]
+        ) -> (known after apply) # forces replacement
+      ~ enable_fault_injection   = false -> (known after apply)
+      ~ id                       = "hw5-product-api-task" -> (known after apply)
+      ~ revision                 = 2 -> (known after apply)
+      - tags                     = {} -> null
+      ~ tags_all                 = {} -> (known after apply)
+        # (12 unchanged attributes hidden)
+
+        # (1 unchanged block hidden)
+    }
+
+Plan: 3 to add, 1 to change, 3 to destroy.
+module.ecs.aws_ecs_task_definition.this: Destroying... [id=hw5-product-api-task]
+module.ecs.aws_ecs_task_definition.this: Destruction complete after 0s
+docker_registry_image.app: Destroying... [id=sha256:fb3a98ee70d2c4da31d7ebce185cc17ed207605f43519da3987daccc746b9b4e]
+docker_registry_image.app: Destruction complete after 0s
+docker_image.app: Destroying... [id=sha256:fb3a98ee70d2c4da31d7ebce185cc17ed207605f43519da3987daccc746b9b4e017724090080.dkr.ecr.us-east-1.amazonaws.com/hw5-product-api:latest]
+docker_image.app: Destruction complete after 1s
+docker_image.app: Creating...
+docker_image.app: Still creating... [00m10s elapsed]
+docker_image.app: Still creating... [00m20s elapsed]
+docker_image.app: Still creating... [00m30s elapsed]
+docker_image.app: Creation complete after 35s [id=sha256:be8a5276e69532f4da97e16e1fc419eccffde07f2f02149ef54dc5a21a5b82ae017724090080.dkr.ecr.us-east-1.amazonaws.com/hw5-product-api:latest]
+docker_registry_image.app: Creating...
+docker_registry_image.app: Creation complete after 6s [id=sha256:be8a5276e69532f4da97e16e1fc419eccffde07f2f02149ef54dc5a21a5b82ae]
+module.ecs.aws_ecs_task_definition.this: Creating...
+module.ecs.aws_ecs_task_definition.this: Creation complete after 1s [id=hw5-product-api-task]
+module.ecs.aws_ecs_service.this: Modifying... [id=arn:aws:ecs:us-east-1:017724090080:service/hw5-product-api-cluster/hw5-product-api]
+module.ecs.aws_ecs_service.this: Still modifying... [id=arn:aws:ecs:us-east-1:017724090080:serv...w5-product-api-cluster/hw5-product-api, 00m10s elapsed]
+module.ecs.aws_ecs_service.this: Still modifying... [id=arn:aws:ecs:us-east-1:017724090080:serv...w5-product-api-cluster/hw5-product-api, 00m20s elapsed]
+module.ecs.aws_ecs_service.this: Still modifying... [id=arn:aws:ecs:us-east-1:017724090080:serv...w5-product-api-cluster/hw5-product-api, 00m30s elapsed]
+module.ecs.aws_ecs_service.this: Still modifying... [id=arn:aws:ecs:us-east-1:017724090080:serv...w5-product-api-cluster/hw5-product-api, 00m40s elapsed]
+module.ecs.aws_ecs_service.this: Still modifying... [id=arn:aws:ecs:us-east-1:017724090080:serv...w5-product-api-cluster/hw5-product-api, 00m50s elapsed]
+module.ecs.aws_ecs_service.this: Still modifying... [id=arn:aws:ecs:us-east-1:017724090080:serv...w5-product-api-cluster/hw5-product-api, 01m00s elapsed]
+module.ecs.aws_ecs_service.this: Still modifying... [id=arn:aws:ecs:us-east-1:017724090080:serv...w5-product-api-cluster/hw5-product-api, 01m10s elapsed]
+module.ecs.aws_ecs_service.this: Still modifying... [id=arn:aws:ecs:us-east-1:017724090080:serv...w5-product-api-cluster/hw5-product-api, 01m20s elapsed]
+module.ecs.aws_ecs_service.this: Modifications complete after 1m28s [id=arn:aws:ecs:us-east-1:017724090080:service/hw5-product-api-cluster/hw5-product-api]
+
+Apply complete! Resources: 3 added, 1 changed, 3 destroyed.
+
+Outputs:
+
+ecr_repository_url = "017724090080.dkr.ecr.us-east-1.amazonaws.com/hw5-product-api"
+ecs_cluster_name = "hw5-product-api-cluster"
+ecs_service_name = "hw5-product-api"

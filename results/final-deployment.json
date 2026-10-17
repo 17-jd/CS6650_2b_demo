@@ -1,0 +1,11 @@
+{
+  "verified_at": "2026-10-17T05:32:51.302770+00:00",
+  "public_url": "http://35.172.200.112:8080",
+  "image": "017724090080.dkr.ecr.us-east-1.amazonaws.com/hw5-product-api@sha256:be8a5276e69532f4da97e16e1fc419eccffde07f2f02149ef54dc5a21a5b82ae",
+  "task_definition": "arn:aws:ecs:us-east-1:017724090080:task-definition/hw5-product-api-task:3",
+  "rollout_state": "COMPLETED",
+  "checks": "GET 200/404; POST 204/400/404 all passed",
+  "running_tasks": 1,
+  "pending_tasks": 0,
+  "fault_injection": "disabled, verified by HTTP 200 despite X-Test-Error header"
+}
