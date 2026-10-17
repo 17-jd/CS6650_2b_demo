@@ -1,4 +1,12 @@
-**.tfvars
-**.tfstate
-**.tfstate.*
-**/.terraform/
+.DS_Store
+.venv/
+*.tfvars
+*.tfstate*
+.terraform/
+.env
+*.pem
+*.key
+product-service
+*.log
+*.tfplan
+results/*_stats_history.csv

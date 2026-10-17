@@ -1,0 +1,35 @@
+[
+  {
+    "name": "http-50",
+    "client": "ProductHttpUser",
+    "users": 50,
+    "spawn_rate": 10,
+    "wait_seconds": "0.1",
+    "host": "http://18.205.26.175:8080",
+    "start": "2026-10-17T05:20:25.024173+00:00",
+    "end": "2026-10-17T05:21:25.318620+00:00",
+    "exit_code": 0
+  },
+  {
+    "name": "fast-50",
+    "client": "ProductFastHttpUser",
+    "users": 50,
+    "spawn_rate": 10,
+    "wait_seconds": "0.1",
+    "host": "http://18.205.26.175:8080",
+    "start": "2026-10-17T05:21:25.319067+00:00",
+    "end": "2026-10-17T05:22:25.607277+00:00",
+    "exit_code": 0
+  },
+  {
+    "name": "stress-1000",
+    "client": "ProductFastHttpUser",
+    "users": 1000,
+    "spawn_rate": 100,
+    "wait_seconds": "0",
+    "host": "http://18.205.26.175:8080",
+    "start": "2026-10-17T05:22:25.607697+00:00",
+    "end": "2026-10-17T05:23:26.428432+00:00",
+    "exit_code": 0
+  }
+]

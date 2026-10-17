@@ -1,0 +1,8 @@
+GET /products/12345: expected 200, received 200 {"product_id":12345,"sku":"ABC-123-XYZ","manufacturer":"Acme Corporation","category_id":456,"weight":1250,"some_other_id":789}
+GET /products/999: expected 404, received 404 {"error":"NOT_FOUND","message":"Product not found"}
+POST /products/12345/details: expected 204, received 204
+POST /products/12345/details: expected 400, received 400 {"error":"INVALID_INPUT","message":"Check required fields, field limits, and matching product_id"}
+POST /products/999/details: expected 404, received 404 {"error":"NOT_FOUND","message":"Product not found"}
+GET /products/12345: expected 500, received 500 {"error":"INTERNAL_ERROR","message":"Internal server error"}
+POST /products/12345/details: expected 500, received 500 {"error":"INTERNAL_ERROR","message":"Internal server error"}
+PASS: all requested responses matched
