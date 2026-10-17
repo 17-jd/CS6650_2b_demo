@@ -1,0 +1,10 @@
+{"duration_ms":0.046629,"endpoint":"/products/:productId/details","method":"POST","status":204,"time":"2026-10-17T05:17:12.904104797Z"}
+{"duration_ms":0.011741,"endpoint":"/products/:productId/details","method":"POST","status":204,"time":"2026-10-17T05:17:12.904163755Z"}
+{"duration_ms":0.027173,"endpoint":"/products/:productId","method":"GET","status":200,"time":"2026-10-17T05:17:12.904102827Z"}
+{"duration_ms":0.006625,"endpoint":"/products/:productId","method":"GET","status":200,"time":"2026-10-17T05:17:12.904206736Z"}
+{"duration_ms":0.02474,"endpoint":"/products/:productId","method":"GET","status":200,"time":"2026-10-17T05:17:12.905592111Z"}
+{"duration_ms":0.0014249999999999998,"endpoint":"/products/:productId","method":"GET","status":200,"time":"2026-10-17T05:18:12.803897242Z"}
+{"duration_ms":0.003523,"endpoint":"/products/:productId","method":"GET","status":200,"time":"2026-10-17T05:18:12.803937667Z"}
+{"duration_ms":0.001258,"endpoint":"/products/:productId","method":"GET","status":200,"time":"2026-10-17T05:18:12.803951757Z"}
+{"duration_ms":0.005451,"endpoint":"/products/:productId","method":"GET","status":200,"time":"2026-10-17T05:18:12.793613091Z"}
+{"duration_ms":0.0010479999999999999,"endpoint":"/products/:productId","method":"GET","status":200,"time":"2026-10-17T05:18:12.7936328Z"}

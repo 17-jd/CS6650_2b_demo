@@ -1,0 +1,207 @@
+[0m[1mmodule.network.data.aws_vpc.default: Reading...[0m[0m
+[0m[1mdata.aws_iam_role.lab_role: Reading...[0m[0m
+[0m[1mdata.aws_ecr_authorization_token.registry: Reading...[0m[0m
+[0m[1mdata.aws_iam_role.lab_role: Read complete after 1s [id=LabRole][0m
+[0m[1mdata.aws_ecr_authorization_token.registry: Read complete after 1s [id=us-east-1][0m
+[0m[1mmodule.network.data.aws_vpc.default: Read complete after 1s [id=vpc-07c1ae7af5177d895][0m
+[0m[1mmodule.network.data.aws_subnets.default: Reading...[0m[0m
+[0m[1mmodule.network.data.aws_subnets.default: Read complete after 0s [id=us-east-1][0m
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  [32m+[0m create[0m
+
+Terraform will perform the following actions:
+
+[1m  # docker_image.app[0m will be created
+[0m  [32m+[0m[0m resource "docker_image" "app" {
+      [32m+[0m[0m id          = (known after apply)
+      [32m+[0m[0m image_id    = (known after apply)
+      [32m+[0m[0m name        = (known after apply)
+      [32m+[0m[0m repo_digest = (known after apply)
+      [32m+[0m[0m triggers    = {
+          [32m+[0m[0m "source_hash" = "58d220b01c8f95356a8b329445a3c62f28407b1363cfd2b4dd3fd92d82aeba32"
+        }
+
+      [32m+[0m[0m build {
+          [32m+[0m[0m additional_contexts = []
+          [32m+[0m[0m cache_from          = []
+          [32m+[0m[0m cache_to            = []
+          [32m+[0m[0m context             = "./../src"
+          [32m+[0m[0m dockerfile          = "Dockerfile"
+          [32m+[0m[0m extra_hosts         = []
+          [32m+[0m[0m platform            = "linux/amd64"
+          [32m+[0m[0m remove              = true
+          [32m+[0m[0m security_opt        = []
+          [32m+[0m[0m tag                 = []
+            [90m# (12 unchanged attributes hidden)[0m[0m
+        }
+    }
+
+[1m  # docker_registry_image.app[0m will be created
+[0m  [32m+[0m[0m resource "docker_registry_image" "app" {
+      [32m+[0m[0m id                   = (known after apply)
+      [32m+[0m[0m insecure_skip_verify = false
+      [32m+[0m[0m keep_remotely        = false
+      [32m+[0m[0m name                 = (known after apply)
+      [32m+[0m[0m sha256_digest        = (known after apply)
+      [32m+[0m[0m triggers             = (known after apply)
+    }
+
+[1m  # module.ecr.aws_ecr_repository.this[0m will be created
+[0m  [32m+[0m[0m resource "aws_ecr_repository" "this" {
+      [32m+[0m[0m arn                  = (known after apply)
+      [32m+[0m[0m id                   = (known after apply)
+      [32m+[0m[0m image_tag_mutability = "MUTABLE"
+      [32m+[0m[0m name                 = "hw5-product-api"
+      [32m+[0m[0m region               = "us-east-1"
+      [32m+[0m[0m registry_id          = (known after apply)
+      [32m+[0m[0m repository_url       = (known after apply)
+      [32m+[0m[0m tags_all             = (known after apply)
+    }
+
+[1m  # module.ecs.aws_ecs_cluster.this[0m will be created
+[0m  [32m+[0m[0m resource "aws_ecs_cluster" "this" {
+      [32m+[0m[0m arn      = (known after apply)
+      [32m+[0m[0m id       = (known after apply)
+      [32m+[0m[0m name     = "hw5-product-api-cluster"
+      [32m+[0m[0m region   = "us-east-1"
+      [32m+[0m[0m tags_all = (known after apply)
+
+      [32m+[0m[0m setting (known after apply)
+    }
+
+[1m  # module.ecs.aws_ecs_service.this[0m will be created
+[0m  [32m+[0m[0m resource "aws_ecs_service" "this" {
+      [32m+[0m[0m arn                                = (known after apply)
+      [32m+[0m[0m availability_zone_rebalancing      = "DISABLED"
+      [32m+[0m[0m cluster                            = (known after apply)
+      [32m+[0m[0m deployment_maximum_percent         = 200
+      [32m+[0m[0m deployment_minimum_healthy_percent = 100
+      [32m+[0m[0m desired_count                      = 1
+      [32m+[0m[0m enable_ecs_managed_tags            = false
+      [32m+[0m[0m enable_execute_command             = false
+      [32m+[0m[0m iam_role                           = (known after apply)
+      [32m+[0m[0m id                                 = (known after apply)
+      [32m+[0m[0m launch_type                        = "FARGATE"
+      [32m+[0m[0m name                               = "hw5-product-api"
+      [32m+[0m[0m platform_version                   = (known after apply)
+      [32m+[0m[0m region                             = "us-east-1"
+      [32m+[0m[0m scheduling_strategy                = "REPLICA"
+      [32m+[0m[0m tags_all                           = (known after apply)
+      [32m+[0m[0m task_definition                    = (known after apply)
+      [32m+[0m[0m triggers                           = (known after apply)
+      [32m+[0m[0m wait_for_steady_state              = true
+
+      [32m+[0m[0m network_configuration {
+          [32m+[0m[0m assign_public_ip = true
+          [32m+[0m[0m security_groups  = (known after apply)
+          [32m+[0m[0m subnets          = [
+              [32m+[0m[0m "subnet-01ad002bd0fac3875",
+              [32m+[0m[0m "subnet-039653c13ae71f758",
+              [32m+[0m[0m "subnet-060bac3e385fd534f",
+              [32m+[0m[0m "subnet-0c92bac51b1a565ba",
+              [32m+[0m[0m "subnet-0ce140be11bc23289",
+              [32m+[0m[0m "subnet-0f588e06ecc4862dc",
+            ]
+        }
+    }
+
+[1m  # module.ecs.aws_ecs_task_definition.this[0m will be created
+[0m  [32m+[0m[0m resource "aws_ecs_task_definition" "this" {
+      [32m+[0m[0m arn                      = (known after apply)
+      [32m+[0m[0m arn_without_revision     = (known after apply)
+      [32m+[0m[0m container_definitions    = (known after apply)
+      [32m+[0m[0m cpu                      = "256"
+      [32m+[0m[0m enable_fault_injection   = (known after apply)
+      [32m+[0m[0m execution_role_arn       = "arn:aws:iam::017724090080:role/LabRole"
+      [32m+[0m[0m family                   = "hw5-product-api-task"
+      [32m+[0m[0m id                       = (known after apply)
+      [32m+[0m[0m memory                   = "512"
+      [32m+[0m[0m network_mode             = "awsvpc"
+      [32m+[0m[0m region                   = "us-east-1"
+      [32m+[0m[0m requires_compatibilities = [
+          [32m+[0m[0m "FARGATE",
+        ]
+      [32m+[0m[0m revision                 = (known after apply)
+      [32m+[0m[0m skip_destroy             = false
+      [32m+[0m[0m tags_all                 = (known after apply)
+      [32m+[0m[0m task_role_arn            = "arn:aws:iam::017724090080:role/LabRole"
+      [32m+[0m[0m track_latest             = false
+
+      [32m+[0m[0m runtime_platform {
+          [32m+[0m[0m cpu_architecture        = "X86_64"
+          [32m+[0m[0m operating_system_family = "LINUX"
+        }
+    }
+
+[1m  # module.logging.aws_cloudwatch_log_group.this[0m will be created
+[0m  [32m+[0m[0m resource "aws_cloudwatch_log_group" "this" {
+      [32m+[0m[0m arn               = (known after apply)
+      [32m+[0m[0m id                = (known after apply)
+      [32m+[0m[0m log_group_class   = (known after apply)
+      [32m+[0m[0m name              = "/ecs/hw5-product-api"
+      [32m+[0m[0m name_prefix       = (known after apply)
+      [32m+[0m[0m region            = "us-east-1"
+      [32m+[0m[0m retention_in_days = 7
+      [32m+[0m[0m skip_destroy      = false
+      [32m+[0m[0m tags_all          = (known after apply)
+    }
+
+[1m  # module.network.aws_security_group.this[0m will be created
+[0m  [32m+[0m[0m resource "aws_security_group" "this" {
+      [32m+[0m[0m arn                    = (known after apply)
+      [32m+[0m[0m description            = "Allow inbound on 8080"
+      [32m+[0m[0m egress                 = [
+          [32m+[0m[0m {
+              [32m+[0m[0m cidr_blocks      = [
+                  [32m+[0m[0m "0.0.0.0/0",
+                ]
+              [32m+[0m[0m description      = "Allow all outbound"
+              [32m+[0m[0m from_port        = 0
+              [32m+[0m[0m ipv6_cidr_blocks = []
+              [32m+[0m[0m prefix_list_ids  = []
+              [32m+[0m[0m protocol         = "-1"
+              [32m+[0m[0m security_groups  = []
+              [32m+[0m[0m self             = false
+              [32m+[0m[0m to_port          = 0
+            },
+        ]
+      [32m+[0m[0m id                     = (known after apply)
+      [32m+[0m[0m ingress                = [
+          [32m+[0m[0m {
+              [32m+[0m[0m cidr_blocks      = [
+                  [32m+[0m[0m "172.56.196.186/32",
+                ]
+              [32m+[0m[0m description      = "Allow HTTP traffic"
+              [32m+[0m[0m from_port        = 8080
+              [32m+[0m[0m ipv6_cidr_blocks = []
+              [32m+[0m[0m prefix_list_ids  = []
+              [32m+[0m[0m protocol         = "tcp"
+              [32m+[0m[0m security_groups  = []
+              [32m+[0m[0m self             = false
+              [32m+[0m[0m to_port          = 8080
+            },
+        ]
+      [32m+[0m[0m name                   = "hw5-product-api-sg"
+      [32m+[0m[0m name_prefix            = (known after apply)
+      [32m+[0m[0m owner_id               = (known after apply)
+      [32m+[0m[0m region                 = "us-east-1"
+      [32m+[0m[0m revoke_rules_on_delete = false
+      [32m+[0m[0m tags_all               = (known after apply)
+      [32m+[0m[0m vpc_id                 = "vpc-07c1ae7af5177d895"
+    }
+
+[1mPlan:[0m [0m8 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  [32m+[0m[0m ecr_repository_url = (known after apply)
+  [32m+[0m[0m ecs_cluster_name   = "hw5-product-api-cluster"
+  [32m+[0m[0m ecs_service_name   = "hw5-product-api"
+[90m
+─────────────────────────────────────────────────────────────────────────────[0m
+
+Saved the plan to: hw5.tfplan
+
+To perform exactly these actions, run the following command to apply:
+    terraform apply "hw5.tfplan"

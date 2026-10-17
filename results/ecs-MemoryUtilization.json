@@ -1,0 +1,29 @@
+{
+  "Label": "MemoryUtilization",
+  "Datapoints": [
+    {
+      "Timestamp": "2026-10-17T01:19:00-04:00",
+      "Average": 0.5208333333333334,
+      "Maximum": 0.78125,
+      "Unit": "Percent"
+    },
+    {
+      "Timestamp": "2026-10-17T01:20:00-04:00",
+      "Average": 1.0416666666666667,
+      "Maximum": 1.5625,
+      "Unit": "Percent"
+    },
+    {
+      "Timestamp": "2026-10-17T01:21:00-04:00",
+      "Average": 1.5625,
+      "Maximum": 1.5625,
+      "Unit": "Percent"
+    },
+    {
+      "Timestamp": "2026-10-17T01:22:00-04:00",
+      "Average": 3.5481770833333335,
+      "Maximum": 7.51953125,
+      "Unit": "Percent"
+    }
+  ]
+}
