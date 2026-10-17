@@ -4,6 +4,7 @@ module "network" {
   source         = "./modules/network"
   service_name   = var.service_name
   container_port = var.container_port
+  cidr_blocks    = var.allowed_cidrs
 }
 
 module "ecr" {
@@ -25,7 +26,7 @@ data "aws_iam_role" "lab_role" {
 module "ecs" {
   source             = "./modules/ecs"
   service_name       = var.service_name
-  image              = "${module.ecr.repository_url}:latest"
+  image              = "${module.ecr.repository_url}@${docker_registry_image.app.sha256_digest}"
   container_port     = var.container_port
   subnet_ids         = module.network.subnet_ids
   security_group_ids = [module.network.security_group_id]
@@ -34,6 +35,7 @@ module "ecs" {
   log_group_name     = module.logging.log_group_name
   ecs_count          = var.ecs_count
   region             = var.aws_region
+  depends_on         = [docker_registry_image.app]
 }
 
 
@@ -42,14 +44,20 @@ resource "docker_image" "app" {
   # Use the URL from the ecr module, and tag it "latest"
   name = "${module.ecr.repository_url}:latest"
 
+  triggers = {
+    source_hash = sha256(join("", [for f in fileset("${path.module}/../src", "*") : filesha256("${path.module}/../src/${f}") if !endswith(f, "_test.go") && f != "product-service"]))
+  }
+
   build {
     # relative path from terraform/ → src/
-    context = "../src"
+    context  = "${path.module}/../src"
+    platform = "linux/arm64"
     # Dockerfile defaults to "Dockerfile" in that context
   }
 }
 
 resource "docker_registry_image" "app" {
   # this will push :latest → ECR
-  name = docker_image.app.name
+  name     = docker_image.app.name
+  triggers = { image_id = docker_image.app.image_id }
 }

@@ -14,10 +14,16 @@ resource "aws_ecs_task_definition" "this" {
   execution_role_arn = var.execution_role_arn
   task_role_arn      = var.task_role_arn
 
+  runtime_platform {
+    operating_system_family = "LINUX"
+    cpu_architecture        = "ARM64"
+  }
+
   container_definitions = jsonencode([{
-    name      = "${var.service_name}-container"
-    image     = var.image
-    essential = true
+    name        = "${var.service_name}-container"
+    image       = var.image
+    essential   = true
+    environment = [{ name = "ENABLE_TEST_ERRORS", value = "false" }]
 
     portMappings = [{
       containerPort = var.container_port
@@ -36,15 +42,16 @@ resource "aws_ecs_task_definition" "this" {
 
 # ECS Service
 resource "aws_ecs_service" "this" {
-  name            = var.service_name
-  cluster         = aws_ecs_cluster.this.id
-  task_definition = aws_ecs_task_definition.this.arn
-  desired_count   = var.ecs_count
-  launch_type     = "FARGATE"
+  name                  = var.service_name
+  cluster               = aws_ecs_cluster.this.id
+  task_definition       = aws_ecs_task_definition.this.arn
+  desired_count         = var.ecs_count
+  launch_type           = "FARGATE"
+  wait_for_steady_state = true
 
   network_configuration {
-    subnets         = var.subnet_ids
-    security_groups = var.security_group_ids
+    subnets          = var.subnet_ids
+    security_groups  = var.security_group_ids
     assign_public_ip = true
   }
 }
